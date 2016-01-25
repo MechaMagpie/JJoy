@@ -84,11 +84,22 @@ import statements.functions.shuffle.Swap;
 import statements.functions.tests.Eq;
 import statements.functions.tests.Geq;
 import statements.functions.tests.Gt;
+import statements.functions.tests.Has;
+import statements.functions.tests.Identical;
 import statements.functions.tests.Leq;
 import statements.functions.tests.Lt;
 import statements.functions.tests.Neq;
 import statements.functions.tests.Nulltest;
 import statements.functions.tests.Small;
+import statements.functions.tests.TestChar;
+import statements.functions.tests.TestFloat;
+import statements.functions.tests.TestInt;
+import statements.functions.tests.TestLeaf;
+import statements.functions.tests.TestList;
+import statements.functions.tests.TestLogical;
+import statements.functions.tests.TestSet;
+import statements.functions.tests.TestString;
+import statements.functions.tests.TestUser;
 import statements.functions.time.Gmtime;
 import statements.functions.time.Localtime;
 import statements.functions.time.Mktime;
@@ -220,6 +231,18 @@ public abstract class builtins {
 			{"<", Lt.class},
 			{"=", Eq.class},
 			{"!=", Neq.class},
+			{"equal", Identical.class},
+			{"has", Has.class},
+			{"integer", TestInt.class},
+			{"char", TestChar.class},
+			{"logical", TestLogical.class},
+			{"string", TestString.class},
+			{"list", TestList.class},
+			{"leaf", TestLeaf.class},
+			{"user", TestUser.class},
+			{"float", TestFloat.class},
+			//TODO: file
+			{"set", TestSet.class},
 			{"times", Times.class},
 			{"dip", Dip.class},
 			{"i", I.class},

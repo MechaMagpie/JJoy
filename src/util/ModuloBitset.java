@@ -106,6 +106,10 @@ public class ModuloBitset {
 		throw new ArrayIndexOutOfBoundsException();
 	}
 	
+	public boolean contains(long index) {
+		return (index | value) != 0;
+	}
+	
 	public long size() {
 		long n = 0;
 		for(long i = 0; i < setSize; i++) 

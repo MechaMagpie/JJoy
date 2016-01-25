@@ -12,12 +12,6 @@ public class PushChar extends LiteralStatement {
 		return "\'" + Character.toString(value);
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof PushChar)) return false;
-		return value == ((PushChar)obj).value;
-	}
-	
 	public char charValue() {
 		return value;
 	}

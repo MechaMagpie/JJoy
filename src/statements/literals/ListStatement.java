@@ -1,5 +1,6 @@
 package statements.literals;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import interpreter.NoBracesStack;
@@ -66,5 +67,20 @@ public abstract class ListStatement extends AggregateStatement implements Numeri
 		else if(obj instanceof NumericValue)
 			return ((NumericValue) obj).longValue() == 0;
 		else return false;
+	}
+	
+	public boolean identical(ListStatement l2) {
+		Iterator<AbstractStatement> iter1 = body.iterator();
+		Iterator<AbstractStatement> iter2 = l2.body.iterator();
+		while(iter1.hasNext()) {
+			AbstractStatement s1 = iter1.next(), s2 = iter2.next();
+			if(s1 instanceof ListStatement) {
+				if(!(s2 instanceof ListStatement && ((ListStatement)s1).identical((ListStatement)s2)))
+					return false;
+			}
+			else if(!s1.equals(s2))
+				return false;
+		}
+		return true;
 	}
 }
