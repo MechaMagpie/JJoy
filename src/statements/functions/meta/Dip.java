@@ -2,16 +2,21 @@ package statements.functions.meta;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
-import statements.ListStatement;
+import statements.EvaluationException;
+import statements.functions.BinaryFunction;
+import statements.literals.ListStatement;
 
-public class Dip extends AbstractStatement {
+public class Dip extends BinaryFunction<AbstractStatement, ListStatement>{
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		ListStatement p = (ListStatement) stackState.pop();
-		AbstractStatement x = stackState.pop();
-		p.dequote(stackState);
-		stackState.push(x);
+	protected void eval(NoBracesStack stackState, AbstractStatement a, ListStatement b) throws EvaluationException {
+		b.dequote(stackState);
+		stackState.push(a);
 	}
 
+	@Override
+	public String name() {
+		return "dip";
+	}
+	
 }

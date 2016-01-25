@@ -2,23 +2,21 @@ package statements.functions.shuffle;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.functions.QuaternaryFunction;
 
-public class Rotated extends AbstractStatement {
-
+public class Rotated extends QuaternaryFunction<AbstractStatement, AbstractStatement, AbstractStatement, AbstractStatement> {
+	
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement w = stackState.pop();
-		AbstractStatement z = stackState.pop();
-		AbstractStatement y = stackState.pop();
-		AbstractStatement x = stackState.pop();
-		stackState.push(z);
-		stackState.push(y);
-		stackState.push(x);
-		stackState.push(w);
+	protected void eval(NoBracesStack stackState, AbstractStatement a, AbstractStatement b, AbstractStatement c,
+			AbstractStatement d) {
+		stackState.push(c);
+		stackState.push(b);
+		stackState.push(a);
+		stackState.push(d);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "rotated";
 	}
 }

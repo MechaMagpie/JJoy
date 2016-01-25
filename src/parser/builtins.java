@@ -1,20 +1,25 @@
 package parser;
 
+import statements.functions.Body;
 import statements.functions.Choice;
 import statements.functions.Chr;
 import statements.functions.Id;
+import statements.functions.Name;
 import statements.functions.Ord;
 import statements.functions.Strtod;
 import statements.functions.Strtol;
-import statements.functions.Times;
 import statements.functions.list.At;
+import statements.functions.list.Concat;
 import statements.functions.list.Cons;
+import statements.functions.list.Drop;
+import statements.functions.list.Enconcat;
 import statements.functions.list.First;
 import statements.functions.list.Of;
 import statements.functions.list.QuoteStack;
 import statements.functions.list.Rest;
 import statements.functions.list.Size;
 import statements.functions.list.Swons;
+import statements.functions.list.Take;
 import statements.functions.list.Uncons;
 import statements.functions.list.Unstack;
 import statements.functions.list.Unswons;
@@ -62,6 +67,8 @@ import statements.functions.meta.Case;
 import statements.functions.meta.Dip;
 import statements.functions.meta.I;
 import statements.functions.meta.Nullary;
+import statements.functions.meta.Opcase;
+import statements.functions.meta.Times;
 import statements.functions.meta.Unary;
 import statements.functions.shuffle.Dup;
 import statements.functions.shuffle.Dupd;
@@ -74,6 +81,14 @@ import statements.functions.shuffle.Rollupd;
 import statements.functions.shuffle.Rotate;
 import statements.functions.shuffle.Rotated;
 import statements.functions.shuffle.Swap;
+import statements.functions.tests.Eq;
+import statements.functions.tests.Geq;
+import statements.functions.tests.Gt;
+import statements.functions.tests.Leq;
+import statements.functions.tests.Lt;
+import statements.functions.tests.Neq;
+import statements.functions.tests.Nulltest;
+import statements.functions.tests.Small;
 import statements.functions.time.Gmtime;
 import statements.functions.time.Localtime;
 import statements.functions.time.Mktime;
@@ -187,10 +202,24 @@ public abstract class builtins {
 			{"at", At.class},
 			{"of", Of.class},
 			{"size", Size.class},
-			//TODO: opcase
+			{"opcase", Opcase.class},
 			{"case", Case.class},
 			{"uncons", Uncons.class},
 			{"unswons", Unswons.class},
+			{"drop", Drop.class},
+			{"take", Take.class},
+			{"concat", Concat.class},
+			{"enconcat", Enconcat.class},
+			{"name", Name.class},
+			{"body", Body.class},
+			{"null", Nulltest.class},
+			{"small", Small.class},
+			{">=", Geq.class},
+			{">", Gt.class},
+			{"<=", Leq.class},
+			{"<", Lt.class},
+			{"=", Eq.class},
+			{"!=", Neq.class},
 			{"times", Times.class},
 			{"dip", Dip.class},
 			{"i", I.class},

@@ -1,26 +1,21 @@
 package statements.functions.logic;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
-import statements.PushBits;
-import statements.PushTruth;
+import util.ModuloBitset;
 
-public class Or extends AbstractStatement {
+public class Or extends LogicFunction {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		LiteralStatement y = (LiteralStatement) stackState.pop();
-		LiteralStatement x = (LiteralStatement) stackState.pop();
-		if(y instanceof PushBits) {
-			stackState.push(new PushBits(((PushBits)y).extractValue().or(((PushBits)x).extractValue())));
-		} else {
-			stackState.push(new PushTruth(((PushTruth)x).extractValue() || ((PushTruth)y).extractValue()));
-		}
+	protected boolean boolCase(boolean a, boolean b) {
+		return a || b;
 	}
 
 	@Override
-	public String toString() {
+	protected ModuloBitset setCase(ModuloBitset a, ModuloBitset b) {
+		return a.or(b);
+	}
+
+	@Override
+	public String name() {
 		return "or";
 	}
 }

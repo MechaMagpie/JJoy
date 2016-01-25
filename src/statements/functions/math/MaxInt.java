@@ -1,10 +1,10 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.PushInteger;
+import statements.functions.AbstractFunction;
+import statements.literals.PushInteger;
 
-public class MaxInt extends AbstractStatement {
+public class MaxInt extends AbstractFunction {
 
 	@Override
 	public void eval(NoBracesStack stackState) {
@@ -12,7 +12,7 @@ public class MaxInt extends AbstractStatement {
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "maxint";
 	}
 }

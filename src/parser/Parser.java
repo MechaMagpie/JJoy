@@ -2,12 +2,22 @@ package parser;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
 import statements.keywords.*;
+import statements.literals.ListStatement;
+import statements.literals.ListedList;
+import statements.literals.NumberStatement;
+import statements.literals.PushBits;
+import statements.literals.PushChar;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
+import statements.literals.PushString;
 import statements.*;
+import statements.functions.Intern;
 
 public class Parser {
 	private FunctionParser fparser;
@@ -17,7 +27,7 @@ public class Parser {
 	private ProgramEvaluator evalResult;
 
 	public Parser(Reader reader, ProgramEvaluator evalResult) {
-		fparser = new FunctionParser();
+		fparser = new FunctionParser(new Intern(this));
 		this.reader = reader;
 		this.evalResult = evalResult;
 	}
@@ -44,6 +54,23 @@ public class Parser {
 				}
 			}
 		}
+	}
+	
+	public AbstractStatement parseSingle(String name) {
+		Reader temp = reader;
+		char tempC = lastRead;
+		reader = new StringReader(name);
+		AbstractStatement a = null;
+		try {
+			feed();
+			a = parseStatement();
+		} catch (IOException e) {
+			// This should be unreachable
+			e.printStackTrace();
+		}
+		reader = temp;
+		lastRead = tempC;
+		return a;
 	}
 
 	private void parseDefine() throws IOException {

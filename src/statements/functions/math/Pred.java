@@ -1,24 +1,26 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
-import statements.PushChar;
-import statements.PushInteger;
+import statements.functions.ArgumentTypeException;
+import statements.functions.UnaryFunction;
+import statements.literals.LiteralStatement;
+import statements.literals.PushChar;
+import statements.literals.PushInteger;
 
-public class Pred extends AbstractStatement {
+public class Pred extends UnaryFunction<LiteralStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		LiteralStatement m = (LiteralStatement) stackState.pop();
-		if(m instanceof PushChar) 
-			stackState.push(new PushChar((char) ((int)((PushChar)m).extractValue() - 1)));
+	protected void eval(NoBracesStack stackState, LiteralStatement a) throws ArgumentTypeException {
+		if(a instanceof PushChar)
+			stackState.push(new PushChar((char) (a.longValue() - 1)));
+		else if(a instanceof PushInteger)
+			stackState.push(new PushInteger(a.longValue() - 1));
 		else
-			stackState.push(new PushInteger(((PushInteger)m).extractValue() - 1));
+			throw new ArgumentTypeException(name(), PushInteger.class, 0);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "pred";
 	}
 }

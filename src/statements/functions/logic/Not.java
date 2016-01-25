@@ -1,25 +1,24 @@
 package statements.functions.logic;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
-import statements.PushBits;
-import statements.PushTruth;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.Logical;
+import statements.literals.PushBits;
+import statements.literals.PushTruth;
 
-public class Not extends AbstractStatement {
+public class Not extends UnaryFunction<Logical> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		LiteralStatement x = (LiteralStatement) stackState.pop();
-		if(x instanceof PushBits) {
-			stackState.push(new PushBits(((PushBits)x).extractValue().comp()));
-		} else {
-			stackState.push(new PushTruth(!((PushTruth)x).extractValue()));
-		}
+	protected void eval(NoBracesStack stackState, Logical a) throws EvaluationException {
+		if(a instanceof PushBits)
+			stackState.push(new PushBits(((PushBits)a).setValue().comp()));
+		else
+			stackState.push(new PushTruth(!((PushTruth) a).boolValue()));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "not";
 	}
 }

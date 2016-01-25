@@ -1,30 +1,22 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
+import statements.functions.BinaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushInteger;
 
-public class Max extends AbstractStatement {
+public class Max extends BinaryFunction<NumberStatement, NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		LiteralStatement n2 = (LiteralStatement) stackState.pop();
-		LiteralStatement n1 = (LiteralStatement) stackState.pop();
-		Comparable v2 = (Comparable) n2.extractValue();
-		Comparable v1 = (Comparable) n1.extractValue();
-		try {
-		if(v1.compareTo(v2) > 0) 
-			stackState.push(n1);
+	protected void eval(NoBracesStack stackState, NumberStatement a, NumberStatement b) {
+		if(a instanceof PushInteger && b instanceof PushInteger)
+			stackState.push(a.longValue() > b.longValue() ? a : b);
 		else
-			stackState.push(n2);
-		} catch (ClassCastException e) {
-			throw new RuntimeException("Can't compare dissimilar types");
-			//TODO: better exception
-		}
+			stackState.push(a.doubleValue() > b.doubleValue() ? a : b);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "max";
 	}
 }

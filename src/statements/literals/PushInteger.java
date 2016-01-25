@@ -1,4 +1,4 @@
-package statements;
+package statements.literals;
 
 import interpreter.NoBracesStack;
 
@@ -15,11 +15,6 @@ public class PushInteger extends NumberStatement {
 	}
 
 	@Override
-	public Long extractValue() {
-		return value;
-	}
-	
-	@Override
 	public String toString() {
 		return Long.toString(value);
 	}
@@ -27,5 +22,20 @@ public class PushInteger extends NumberStatement {
 	@Override
 	public PushInteger negate() {
 		return new PushInteger(-value);
+	}
+
+	@Override
+	public double doubleValue() {
+		return value;
+	}
+
+	@Override
+	public long longValue() {
+		return value;
+	}
+	
+	@Override
+	public String name() {
+		return " integer type";
 	}
 }

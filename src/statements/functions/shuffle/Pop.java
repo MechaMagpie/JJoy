@@ -2,16 +2,15 @@ package statements.functions.shuffle;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
 
-public class Pop extends AbstractStatement {
+public class Pop extends UnaryFunction<AbstractStatement> {
+	@Override
+	protected void eval(NoBracesStack stackState, AbstractStatement a) throws EvaluationException {}
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		stackState.pop();
-	}
-
-	@Override
-	public String toString() {
+	public String name() {
 		return "pop";
 	}
 }

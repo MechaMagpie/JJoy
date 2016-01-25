@@ -1,21 +1,14 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
-
-public class Floor extends AbstractStatement {
+public class Floor extends FloatMath {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(Math.floor(n1.extractValue().doubleValue())));
+	protected double mathOp(double arg) {
+		return Math.floor(arg);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "floor";
 	}
 }

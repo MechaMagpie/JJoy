@@ -1,32 +1,27 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.EvaluationException;
+import statements.functions.BinaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
 
-public class Div extends AbstractStatement {
+public class Div extends BinaryFunction<NumberStatement, NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement j = (NumberStatement) stackState.pop();
-		NumberStatement i = (NumberStatement) stackState.pop();
-		if(j instanceof PushInteger && i instanceof PushInteger) {
-			stackState.push(new PushInteger(
-					i.extractValue().longValue() /
-					j.extractValue().longValue()));
-			stackState.push(new PushInteger(
-							i.extractValue().longValue() %
-							j.extractValue().longValue()));
-		}else {
-			stackState.push(new PushFloat(
-					i.extractValue().doubleValue() /
-					j.extractValue().doubleValue()));
-			stackState.push(new PushFloat(
-					i.extractValue().doubleValue() %
-					j.extractValue().doubleValue()));
+	protected void eval(NoBracesStack stackState, NumberStatement a, NumberStatement b) throws EvaluationException {
+		if(a instanceof PushInteger && b instanceof PushInteger) {
+			stackState.push(new PushInteger(a.longValue() / b.longValue()));
+			stackState.push(new PushInteger(a.longValue() % b.longValue()));
+		} else {
+			stackState.push(new PushFloat(a.doubleValue() / b.doubleValue()));
+			stackState.push(new PushFloat(a.doubleValue() % b.doubleValue()));
 		}
 	}
 
+	@Override
+	public String name() {
+		return "div";
+	}
 }

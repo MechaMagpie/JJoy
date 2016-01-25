@@ -1,17 +1,20 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushInteger;
 
-public class Trunc extends AbstractStatement {
+public class Trunc extends UnaryFunction<NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement f = (NumberStatement) stackState.pop();
-		stackState.push(new PushInteger(Math.round(f.extractValue().doubleValue())));
+	protected void eval(NoBracesStack stackState, NumberStatement a) throws EvaluationException {
+		stackState.push(new PushInteger(a.longValue()));
 	}
 
+	@Override
+	public String name() {
+		return "trunc";
+	}
 }

@@ -2,21 +2,19 @@ package statements.functions.shuffle;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.functions.TernaryFunction;
 
-public class Rollup extends AbstractStatement{
+public class Rollup extends TernaryFunction<AbstractStatement, AbstractStatement, AbstractStatement>{
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement z = stackState.pop();
-		AbstractStatement y = stackState.pop();
-		AbstractStatement x = stackState.pop();
-		stackState.push(z);
-		stackState.push(x);
-		stackState.push(y);
+	protected void eval(NoBracesStack stackState, AbstractStatement a, AbstractStatement b, AbstractStatement c) {
+		stackState.push(c);
+		stackState.push(a);
+		stackState.push(b);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "rollup";
 	}
 }

@@ -10,9 +10,8 @@ public class UnknownStatement extends AbstractStatement {
 	}
 	
 	@Override
-	public void eval(NoBracesStack stackState) {
-		//TODO: Better exception
-		throw new RuntimeException("No function by name " + text + "!");
+	public void eval(NoBracesStack stackState) throws UnknownFunctionException {
+		throw new UnknownFunctionException(text);
 	}
 
 	@Override
@@ -22,5 +21,10 @@ public class UnknownStatement extends AbstractStatement {
 	
 	public String getName() {
 		return text;
+	}
+
+	@Override
+	public String name() {
+		return " unknown";
 	}
 }

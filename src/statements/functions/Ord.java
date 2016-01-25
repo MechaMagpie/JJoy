@@ -1,27 +1,18 @@
 package statements.functions;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
-import statements.PushChar;
-import statements.PushInteger;
-import statements.PushTruth;
+import statements.literals.LiteralStatement;
+import statements.literals.PushInteger;
 
-public class Ord extends AbstractStatement {
+public class Ord extends UnaryFunction<LiteralStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		LiteralStatement c = (LiteralStatement) stackState.pop();
-		if(c instanceof PushChar) 
-			stackState.push(new PushInteger(((PushChar) c).extractValue()));
-		else if (c instanceof PushTruth) 
-			stackState.push(new PushInteger((((PushTruth) c).extractValue()) ? 1 : 0));
-		else
-			stackState.push((PushInteger) c);
+	public void eval(NoBracesStack stackState, LiteralStatement a) {
+		stackState.push(new PushInteger(a.longValue()));
 	}
 	
 	@Override
-	public String toString() {
+	public String name() {
 		return "ord";
 	}
 }

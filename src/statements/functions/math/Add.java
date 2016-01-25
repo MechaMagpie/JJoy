@@ -1,39 +1,29 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.LiteralStatement;
-import statements.NumberStatement;
-import statements.PushChar;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.functions.ArgumentTypeException;
+import statements.functions.BinaryFunction;
+import statements.literals.LiteralStatement;
+import statements.literals.NumberStatement;
+import statements.literals.PushChar;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
 
-public class Add extends AbstractStatement {
+public class Add extends BinaryFunction<LiteralStatement, NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement i = (NumberStatement) stackState.pop();
-		LiteralStatement mp = (LiteralStatement) stackState.pop();
-		if(mp instanceof PushChar && i instanceof PushInteger) {
-			stackState.push(new PushChar(
-					(char) ((int)((PushChar)mp).extractValue() + 
-					i.extractValue().intValue())));
-		} else {
-			NumberStatement m = (NumberStatement) mp;
-			if(i instanceof PushInteger && m instanceof PushInteger) {
-				stackState.push(new PushInteger(
-						m.extractValue().longValue() +
-						i.extractValue().longValue()));
-			}else {
-				stackState.push(new PushFloat(
-						m.extractValue().doubleValue() +
-						i.extractValue().doubleValue()));
-			} 
-		}
+	protected void eval(NoBracesStack stackState, LiteralStatement a, NumberStatement b) throws ArgumentTypeException {
+		if(a instanceof PushChar) {
+			if(!(b instanceof PushInteger)) throw new ArgumentTypeException(name(), PushInteger.class, 1);
+			stackState.push(new PushChar((char) (a.longValue() + b.longValue())));
+		} else if (a instanceof PushInteger && b instanceof PushInteger)
+			stackState.push(new PushInteger(a.longValue() + b.longValue()));
+		else
+			stackState.push(new PushFloat(((NumberStatement)a).doubleValue() + b.doubleValue()));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "+";
 	}
 }

@@ -1,26 +1,20 @@
 package statements.functions.list;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.MutableList;
-import statements.PushBits;
-import statements.PushChar;
-import statements.PushInteger;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.AggregateStatement;
+import statements.literals.PushInteger;
 
-public class Size extends AbstractStatement {
+public class Size extends UnaryFunction<AggregateStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement a = stackState.pop();
-		PushInteger i = (PushInteger) stackState.pop();
-		if(a instanceof PushString) {
-			stackState.push(new PushInteger(((PushString)a).extractValue().length()));
-		} else if (a instanceof PushBits) {
-			stackState.push(new PushInteger(((PushBits)a).extractValue().size()));
-		} else {
-			stackState.push(new PushInteger(((MutableList)a).extractBody().size()));
-		}
+	protected void eval(NoBracesStack stackState, AggregateStatement a) throws EvaluationException {
+		stackState.push(new PushInteger(a.size()));
 	}
 
+	@Override
+	public String name() {
+		return "size";
+	}
 }

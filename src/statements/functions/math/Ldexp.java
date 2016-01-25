@@ -1,21 +1,19 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
+import statements.functions.BinaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
 
-public class Ldexp extends AbstractStatement {
+public class Ldexp extends BinaryFunction<NumberStatement, NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement i = (NumberStatement) stackState.pop();
-		NumberStatement f = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(f.extractValue().doubleValue() * Math.pow(2, i.extractValue().doubleValue())));
+	protected void eval(NoBracesStack stackState, NumberStatement a, NumberStatement b) {
+		stackState.push(new PushFloat(a.doubleValue() * Math.pow(2, b.doubleValue())));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "ldexp";
 	}
 }

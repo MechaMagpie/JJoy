@@ -1,21 +1,17 @@
 package statements.functions;
 
-import javax.print.attribute.IntegerSyntax;
-
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.PushInteger;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.literals.PushInteger;
+import statements.literals.PushString;
 
-public class Strtol extends AbstractStatement {
-
+public class Strtol extends BinaryFunction<PushString, PushInteger> {
+	
 	@Override
-	public void eval(NoBracesStack stackState) {
-		PushInteger i = (PushInteger) stackState.pop();
-		PushString s = (PushString) stackState.pop();
+	protected void eval(NoBracesStack stackState, PushString a, PushInteger b) throws EvaluationException {
 		int radix;
-		String tempStr = s.extractValue(); 
-		if(i.extractValue() == 0) radix = 10;
+		String tempStr = a.stringValue();
+		if(b.longValue() == 0) radix = 10;
 		if(tempStr.startsWith("0x")) {
 			radix = 16;
 			tempStr = tempStr.substring(2);
@@ -25,13 +21,13 @@ public class Strtol extends AbstractStatement {
 			tempStr = tempStr.substring(1);
 		}
 		else {
-			radix = i.extractValue().intValue();
+			radix = (int) b.longValue();
 		}
 		stackState.push(new PushInteger(Long.parseLong(tempStr, radix)));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "strtol";
 	}
 }

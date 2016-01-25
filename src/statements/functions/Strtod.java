@@ -1,20 +1,19 @@
 package statements.functions;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.PushFloat;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.literals.PushFloat;
+import statements.literals.PushString;
 
-public class Strtod extends AbstractStatement {
-
+public class Strtod extends UnaryFunction<PushString> {
+	
 	@Override
-	public void eval(NoBracesStack stackState) {
-		PushString s = (PushString) stackState.pop();
-		stackState.push(new PushFloat(Double.parseDouble(s.extractValue())));
+	protected void eval(NoBracesStack stackState, PushString a) throws EvaluationException {
+		stackState.push(new PushFloat(Double.parseDouble(a.stringValue())));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "strtod";
 	}
 }

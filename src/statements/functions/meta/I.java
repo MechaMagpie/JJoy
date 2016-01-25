@@ -1,19 +1,19 @@
 package statements.functions.meta;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.ListStatement;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.ListStatement;
 
-public class I extends AbstractStatement {
+public class I extends UnaryFunction<ListStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		ListStatement p = (ListStatement) stackState.pop();
-		p.dequote(stackState);
+	protected void eval(NoBracesStack stackState, ListStatement a) throws EvaluationException {
+		a.dequote(stackState);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "i";
 	}
 }

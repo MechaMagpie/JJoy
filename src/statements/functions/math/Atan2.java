@@ -1,17 +1,20 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
+import statements.functions.BinaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
 
-public class Atan2 extends AbstractStatement {
+public class Atan2 extends BinaryFunction<NumberStatement, NumberStatement> {
+
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement g = (NumberStatement) stackState.pop();
-		NumberStatement f = (NumberStatement) stackState.pop();		
-		stackState.push(new PushFloat(Math.atan2(f.extractValue().doubleValue(), g.extractValue().doubleValue())));
+	public String name() {
+		return "atan2";
 	}
 
+	@Override
+	protected void eval(NoBracesStack stackState, NumberStatement a, NumberStatement b) {
+		stackState.push(new PushFloat(Math.atan2(a.doubleValue(), b.doubleValue())));
+	}
 }

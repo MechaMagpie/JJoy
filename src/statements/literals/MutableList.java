@@ -1,10 +1,11 @@
-package statements;
+package statements.literals;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import interpreter.NoBracesStack;
+import statements.AbstractStatement;
 
 public class MutableList extends ListStatement {
 
@@ -23,8 +24,12 @@ public class MutableList extends ListStatement {
 		return body.listIterator();
 	}
 	
-	public List<AbstractStatement> extractBody() {
+	public LinkedList<AbstractStatement> body() {
 		return super.body;
+	}
+	
+	public void replaceBody(LinkedList<AbstractStatement> newBody) {
+		super.body = newBody;
 	}
 	
 	@Override

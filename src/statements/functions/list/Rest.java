@@ -1,36 +1,32 @@
 package statements.functions.list;
 
-import java.util.List;
-
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.MutableList;
-import statements.PushBits;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.AggregateStatement;
+import statements.literals.MutableList;
+import statements.literals.PushBits;
+import statements.literals.PushString;
 
-public class Rest extends AbstractStatement {
+public class Rest extends UnaryFunction<AggregateStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement a = stackState.pop();
-		if(a instanceof PushString) {
-			stackState.push(new PushString(((PushString)a).extractValue().substring(1)));
-		} else if (a instanceof PushBits) {
-			stackState.push(new PushBits(((PushBits)a).extractValue().rest()));
-		} else {
+	protected void eval(NoBracesStack stackState, AggregateStatement a) throws EvaluationException {
+		if(a instanceof PushString)
+			stackState.push(new PushString(((PushString) a).stringValue().substring(1)));
+		else if(a instanceof PushBits)
+			stackState.push(new PushBits(((PushBits) a).setValue().rest()));
+		else
 			if(stackState.canPop()) {
-				// Optimized cdr
-				((MutableList)a).extractBody().remove(0);
+				((MutableList)a).body().pop();
 				stackState.push(a);
 			} else {
-				List<AbstractStatement> list = ((MutableList)a).extractBody();
-				stackState.push(new MutableList(list.subList(1, list.size())));
+				stackState.push(new MutableList(((MutableList)a).body().subList(1, (int) a.size())));
 			}
-		}
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "rest";
 	}
 }

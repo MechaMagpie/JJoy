@@ -1,21 +1,13 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
-
-public class Acos extends AbstractStatement {
-
+public class Acos extends FloatMath {
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(Math.acos(n1.extractValue().doubleValue())));
+	public String name() {
+		return "acos";
 	}
 
 	@Override
-	public String toString() {
-		return "acos";
+	protected double mathOp(double arg) {
+		return Math.acos(arg);
 	}
 }

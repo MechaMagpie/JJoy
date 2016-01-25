@@ -2,10 +2,9 @@ package parser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.EvaluationException;
 import util.ListDeprinter;
 
 public class Program {
@@ -21,7 +20,12 @@ public class Program {
 	
 	public void eval(NoBracesStack stack) {
 		for(AbstractStatement a : body) {
-			a.eval(stack);
+			try {
+				a.eval(stack);
+			} catch (EvaluationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

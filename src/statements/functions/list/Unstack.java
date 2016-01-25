@@ -1,20 +1,20 @@
 package statements.functions.list;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.MutableList;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.MutableList;
 
-public class Unstack extends AbstractStatement {
+public class Unstack extends UnaryFunction<MutableList> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		MutableList list = (MutableList) stackState.pop();
-		stackState.clear();
-		stackState.addAll(list.extractBody());
+	public String name() {
+		return "unstack";
 	}
 
 	@Override
-	public String toString() {
-		return "unstack";
+	protected void eval(NoBracesStack stackState, MutableList a) throws EvaluationException {
+		stackState.clear();
+		stackState.addAll(a.body());
 	}
 }

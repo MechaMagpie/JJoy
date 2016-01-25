@@ -1,25 +1,14 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
-
-public class Abs extends AbstractStatement {
+public class Abs extends FloatMath {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		if(n1 instanceof PushInteger) {
-			stackState.push(new PushInteger(Math.abs(((PushInteger)n1).extractValue())));
-		} else {
-			stackState.push(new PushFloat(Math.abs(((PushFloat)n1).extractValue())));
-		}
+	public String name() {
+		return "abs";
 	}
 
 	@Override
-	public String toString() {
-		return "abs";
+	protected double mathOp(double arg) {
+		return Math.abs(arg);
 	}
 }

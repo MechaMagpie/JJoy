@@ -1,10 +1,8 @@
-package statements;
+package statements.literals;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
-
 import interpreter.NoBracesStack;
-import statements.functions.math.Abs;
+import statements.AbstractStatement;
 
 public class ListedList extends ListStatement {
 
@@ -18,14 +16,14 @@ public class ListedList extends ListStatement {
 	}
 
 	private AbstractStatement instantiate() {
-		ListIterator<AbstractStatement> iter = body.listIterator();
-		while(iter.hasNext()) {
-			AbstractStatement a = iter.next();
-			if(a instanceof ListedList) {
-				iter.set(((ListedList) a).instantiate());
-			}
+		LinkedList<AbstractStatement> tempLst = new LinkedList<AbstractStatement>();
+		for(AbstractStatement a : body) {
+			if(a instanceof ListedList) 
+				tempLst.add(((ListedList) a).instantiate());
+			else 
+				tempLst.add(a);
 		}
-		return new MutableList(body);
-	}
 
+		return new MutableList(tempLst);
+	}
 }

@@ -1,16 +1,14 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-
-public class Sinh extends AbstractStatement {
+public class Sinh extends FloatMath {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement f = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(Math.sinh(f.extractValue().doubleValue())));
+	protected double mathOp(double arg) {
+		return Math.sinh(arg);
 	}
 
+	@Override
+	public String name() {
+		return "sinh";
+	}
 }

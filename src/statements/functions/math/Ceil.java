@@ -1,20 +1,15 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-
-public class Ceil extends AbstractStatement {
+public class Ceil extends FloatMath {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(Math.ceil(n1.extractValue().doubleValue())));
+	protected double mathOp(double arg) {
+		return Math.ceil(arg);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "ceil";
 	}
+
 }

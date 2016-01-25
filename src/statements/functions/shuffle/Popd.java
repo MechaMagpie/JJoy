@@ -2,18 +2,18 @@ package statements.functions.shuffle;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.EvaluationException;
+import statements.functions.BinaryFunction;
 
-public class Popd extends AbstractStatement {
+public class Popd extends BinaryFunction<AbstractStatement, AbstractStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement z = stackState.pop();
-		stackState.pop();
-		stackState.push(z);
+	protected void eval(NoBracesStack stackState, AbstractStatement a, AbstractStatement b) throws EvaluationException {
+		stackState.push(b);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "popd";
 	}
 }

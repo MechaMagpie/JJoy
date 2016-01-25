@@ -1,20 +1,14 @@
 package statements.functions.math;
 
-import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-
-public class Tanh extends AbstractStatement {
+public class Tanh extends FloatMath {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement f = (NumberStatement) stackState.pop();
-		stackState.push(new PushFloat(Math.tanh(f.extractValue().doubleValue())));
+	protected double mathOp(double arg) {
+		return Math.tanh(arg);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "tanh";
 	}
 }

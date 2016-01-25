@@ -1,25 +1,24 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
 
-public class Sign extends AbstractStatement {
-
+public class Sign extends UnaryFunction<NumberStatement> {
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		if(n1 instanceof PushInteger) {
-			stackState.push(new PushInteger(Long.signum(((PushInteger)n1).extractValue())));
+	protected void eval(NoBracesStack stackState, NumberStatement a) throws EvaluationException {
+		if(a instanceof PushInteger) {
+			stackState.push(new PushInteger(Long.signum(a.longValue())));
 		} else {
-			stackState.push(new PushFloat(Math.signum(((PushFloat)n1).extractValue())));
+			stackState.push(new PushFloat(Math.signum(a.doubleValue())));
 		}
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "sign";
 	}
 }

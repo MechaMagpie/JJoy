@@ -1,30 +1,29 @@
 package statements.functions.list;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.ListStatement;
-import statements.MutableList;
-import statements.PushBits;
-import statements.PushChar;
-import statements.PushInteger;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.functions.UnaryFunction;
+import statements.literals.AggregateStatement;
+import statements.literals.MutableList;
+import statements.literals.PushBits;
+import statements.literals.PushChar;
+import statements.literals.PushInteger;
+import statements.literals.PushString;
 
-public class First extends AbstractStatement {
+public class First extends UnaryFunction<AggregateStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement a = stackState.pop();
-		if(a instanceof PushString) {
-			stackState.push(new PushChar(((PushString)a).extractValue().charAt(0)));
-		} else if (a instanceof PushBits) {
-			stackState.push(new PushInteger(((PushBits)a).extractValue().first()));
-		} else {
-			stackState.push(((MutableList)a).extractBody().get(0));
-		}
+	protected void eval(NoBracesStack stackState, AggregateStatement a) throws EvaluationException {
+		if(a instanceof PushString)
+			stackState.push(new PushChar(((PushString) a).stringValue().charAt(0)));
+		else if (a instanceof PushBits)
+			stackState.push(new PushInteger(((PushBits) a).setValue().first()));
+		else
+			stackState.push(((MutableList)a).body().peek());
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "first";
 	}
 }

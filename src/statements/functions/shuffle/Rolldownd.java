@@ -2,23 +2,20 @@ package statements.functions.shuffle;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.functions.QuaternaryFunction;
 
-public class Rolldownd extends AbstractStatement {
-
+public class Rolldownd extends QuaternaryFunction<AbstractStatement, AbstractStatement, AbstractStatement, AbstractStatement> {
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement w = stackState.pop();
-		AbstractStatement z = stackState.pop();
-		AbstractStatement y = stackState.pop();
-		AbstractStatement x = stackState.pop();
-		stackState.push(y);
-		stackState.push(z);
-		stackState.push(x);
-		stackState.push(w);
+	protected void eval(NoBracesStack stackState, AbstractStatement a, AbstractStatement b, AbstractStatement c,
+			AbstractStatement d) {
+		stackState.push(b);
+		stackState.push(c);
+		stackState.push(a);
+		stackState.push(d);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "rolldownd";
 	}
 }

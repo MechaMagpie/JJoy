@@ -1,12 +1,7 @@
 package interpreter;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Random;
-import java.util.Stack;
-
 import statements.AbstractStatement;
 
 @SuppressWarnings("serial")

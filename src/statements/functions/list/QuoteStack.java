@@ -1,10 +1,10 @@
 package statements.functions.list;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.MutableList;
+import statements.functions.AbstractFunction;
+import statements.literals.MutableList;
 
-public class QuoteStack extends AbstractStatement {
+public class QuoteStack extends AbstractFunction {
 
 	@Override
 	public void eval(NoBracesStack stackState) {
@@ -12,7 +12,7 @@ public class QuoteStack extends AbstractStatement {
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "stack";
 	}
 }

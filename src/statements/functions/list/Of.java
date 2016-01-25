@@ -1,30 +1,19 @@
 package statements.functions.list;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.MutableList;
-import statements.PushBits;
-import statements.PushChar;
-import statements.PushInteger;
-import statements.PushString;
+import statements.EvaluationException;
+import statements.literals.AggregateStatement;
+import statements.literals.PushInteger;
 
-public class Of extends AbstractStatement {
+public class Of extends Atof<PushInteger, AggregateStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement a = stackState.pop();
-		PushInteger i = (PushInteger) stackState.pop();
-		if(a instanceof PushString) {
-			stackState.push(new PushChar(((PushString)a).extractValue().charAt(i.extractValue().intValue())));
-		} else if (a instanceof PushBits) {
-			stackState.push(new PushInteger(((PushBits)a).extractValue().get(i.extractValue())));
-		} else {
-			stackState.push(((MutableList)a).extractBody().get(i.extractValue().intValue()));
-		}
+	protected void eval(NoBracesStack stackState, PushInteger a, AggregateStatement b) throws EvaluationException {
+		extract(stackState, b, a);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "of";
 	}
 }

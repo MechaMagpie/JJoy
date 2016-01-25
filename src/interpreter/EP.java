@@ -1,10 +1,7 @@
 package interpreter;
 
-import java.util.Stack;
-
 import parser.Program;
 import parser.ProgramEvaluator;
-import statements.AbstractStatement;
 
 public class EP implements ProgramEvaluator {
 	private NoBracesStack stack;

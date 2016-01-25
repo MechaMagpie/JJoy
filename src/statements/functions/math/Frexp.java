@@ -1,17 +1,16 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.functions.UnaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
 
-public class Frexp extends AbstractStatement {
+public class Frexp extends UnaryFunction<NumberStatement> {
 
-	//TODO: make this work again
 	@Override
-	public void eval(NoBracesStack stackState) {
-		double n1 = ((NumberStatement) stackState.pop()).extractValue().doubleValue();
+	protected void eval(NoBracesStack stackState, NumberStatement a) {
+		double n1 = a.doubleValue();
 		long bits = Double.doubleToLongBits(n1);
 		long mantissa = (bits & ~0x7FF0000000000000L) | 1023L << 52;
 		long exponent = ((bits & 0x7FF0000000000000L) >> 52);
@@ -27,12 +26,11 @@ public class Frexp extends AbstractStatement {
 		}
 		stackState.push(new PushFloat(Double.longBitsToDouble(mantissa)));
 		stackState.push(new PushInteger(exponent));
-
 	}
 
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "frexp";
 	}
 }

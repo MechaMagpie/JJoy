@@ -1,9 +1,8 @@
 package statements.functions;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
 
-public class Id extends AbstractStatement {
+public class Id extends AbstractFunction {
 
 	@Override
 	public void eval(NoBracesStack stackState) {
@@ -11,7 +10,7 @@ public class Id extends AbstractStatement {
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "id";
 	}
 }

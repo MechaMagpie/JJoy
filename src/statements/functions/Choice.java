@@ -2,23 +2,20 @@ package statements.functions;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
-import statements.PushTruth;
+import statements.literals.PushTruth;
 
-public class Choice extends AbstractStatement {
+public class Choice extends TernaryFunction<PushTruth, AbstractStatement, AbstractStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		AbstractStatement f = stackState.pop();
-		AbstractStatement t = stackState.pop();
-		PushTruth b = (PushTruth) stackState.pop();
-		if(b.extractValue())
-			stackState.push(t);
+	protected void eval(NoBracesStack stackState, PushTruth a, AbstractStatement b, AbstractStatement c) {
+		if(a.boolValue())
+			stackState.push(b);
 		else
-			stackState.push(f);
+			stackState.push(c);
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "choice";
 	}
 }

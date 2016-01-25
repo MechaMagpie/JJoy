@@ -1,25 +1,21 @@
 package statements.functions.math;
 
 import interpreter.NoBracesStack;
-import statements.AbstractStatement;
-import statements.NumberStatement;
-import statements.PushFloat;
-import statements.PushInteger;
+import statements.functions.UnaryFunction;
+import statements.literals.NumberStatement;
+import statements.literals.PushFloat;
+import statements.literals.PushInteger;
 
-public class Neg extends AbstractStatement {
+public class Neg extends UnaryFunction<NumberStatement> {
 
 	@Override
-	public void eval(NoBracesStack stackState) {
-		NumberStatement n1 = (NumberStatement) stackState.pop();
-		if(n1 instanceof PushInteger) {
-			stackState.push(new PushInteger(-((PushInteger)n1).extractValue()));
-		} else {
-			stackState.push(new PushFloat(-((PushFloat)n1).extractValue()));
-		}
+	protected void eval(NoBracesStack stackState, NumberStatement a) {
+		if(a instanceof PushInteger) stackState.push(new PushInteger(-a.longValue()));
+		else stackState.push(new PushFloat(-a.doubleValue()));
 	}
 
 	@Override
-	public String toString() {
+	public String name() {
 		return "neg";
 	}
 }

@@ -1,10 +1,9 @@
 package parser;
 
-import java.util.Stack;
+import java.util.List;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
-import statements.ListStatement;
 
 public class UserDef extends AbstractStatement {
 	private Program body;
@@ -19,8 +18,8 @@ public class UserDef extends AbstractStatement {
 		this.body = newBody;
 	}
 	
-	public UserDef invoke () {
-		return new UserDef(body, name);
+	public List<AbstractStatement> getBody() {
+		return body.extractBody();
 	}
 	
 	@Override
@@ -28,12 +27,13 @@ public class UserDef extends AbstractStatement {
 		body.eval(stackState);
 	}
 
-	public String getName() {
-		return name;
-	}
-	
 	@Override
 	public String toString() {
+		return name;
+	}
+
+	@Override
+	public String name() {
 		return name;
 	}
 }
