@@ -1,4 +1,4 @@
-package statements.functions.meta;
+package statements.functions.meta.functionarity;
 
 public class Nullary extends AryFunction{
 

@@ -63,13 +63,23 @@ import statements.functions.math.Succ;
 import statements.functions.math.Tan;
 import statements.functions.math.Tanh;
 import statements.functions.math.Trunc;
+import statements.functions.meta.App1;
+import statements.functions.meta.App11;
+import statements.functions.meta.App12;
 import statements.functions.meta.Case;
+import statements.functions.meta.Construct;
 import statements.functions.meta.Dip;
 import statements.functions.meta.I;
-import statements.functions.meta.Nullary;
 import statements.functions.meta.Opcase;
 import statements.functions.meta.Times;
-import statements.functions.meta.Unary;
+import statements.functions.meta.X;
+import statements.functions.meta.functionarity.Binary;
+import statements.functions.meta.functionarity.Nullary;
+import statements.functions.meta.functionarity.Ternary;
+import statements.functions.meta.functionarity.Unary;
+import statements.functions.meta.functionarity.Unary2;
+import statements.functions.meta.functionarity.Unary3;
+import statements.functions.meta.functionarity.Unary4;
 import statements.functions.shuffle.Dup;
 import statements.functions.shuffle.Dupd;
 import statements.functions.shuffle.Pop;
@@ -237,17 +247,30 @@ public abstract class builtins {
 			{"char", TestChar.class},
 			{"logical", TestLogical.class},
 			{"string", TestString.class},
+			{"set", TestSet.class},
 			{"list", TestList.class},
 			{"leaf", TestLeaf.class},
 			{"user", TestUser.class},
 			{"float", TestFloat.class},
 			//TODO: file
-			{"set", TestSet.class},
-			{"times", Times.class},
-			{"dip", Dip.class},
 			{"i", I.class},
+			{"x", X.class},
+			{"dip", Dip.class},
+			{"app1", App1.class},
+			{"app11", App11.class},
+			{"app12", App12.class},
+			{"construct", Construct.class},
 			{"nullary", Nullary.class},
+			{"unary", Unary.class},
+			{"unary2", Unary2.class},
+			{"unary3", Unary3.class},
+			{"unary4", Unary4.class},
+			{"app2", Unary2.class},			//Including these anyway
+			{"app3", Unary3.class},
+			{"app4", Unary4.class},
+			{"binary", Binary.class},
+			{"ternary", Ternary.class},
 			{"dup", Dup.class},
-			{"unary", Unary.class}
+			{"times", Times.class}
 	};
 }
