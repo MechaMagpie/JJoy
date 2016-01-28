@@ -20,7 +20,9 @@ public class Construct extends BinaryFunction<MutableList, MutableList> {
 		for(AbstractStatement s : b.body()) {
 			if(!(s instanceof MutableList))
 				throw new MalformedListException(name(), b.toString());
-			((MutableList)s).dequote(stackState);
+			tempStk = new LimitedRemoveStack(stackState, 0);
+			((MutableList)s).dequote(tempStk);
+			tempStk.close();
 		}
 	}
 

@@ -50,6 +50,6 @@ public abstract class TernaryFunction<T, U, V>
 		eval(stackState, a, b, c);
 	}
 
-	protected abstract void eval(NoBracesStack stackState, T a, U b, V c) throws MismatchedArgumentsException;
+	protected abstract void eval(NoBracesStack stackState, T a, U b, V c) throws MismatchedArgumentsException, EvaluationException;
 
 }

@@ -25,6 +25,7 @@ public class Case extends BinaryFunction<AbstractStatement, MutableList> {
 
 	@Override
 	protected void eval(NoBracesStack stackState, AbstractStatement a, MutableList b) throws EvaluationException {
+		if(b.body().isEmpty()) throw new MalformedListException(name(), b.toString());
 		ListIterator<AbstractStatement> iter = b.listIterator();
 		try{
 			while(iter.nextIndex() < b.body().size() - 1) {

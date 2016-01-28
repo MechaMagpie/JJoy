@@ -63,6 +63,6 @@ public abstract class QuaternaryFunction<T, U, V, W>
 		eval(stackState, a, b, c, d);
 	}
 
-	protected abstract void eval(NoBracesStack stackState, T a, U b, V c, W d);
+	protected abstract void eval(NoBracesStack stackState, T a, U b, V c, W d) throws EvaluationException;
 
 }

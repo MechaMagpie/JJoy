@@ -67,12 +67,23 @@ import statements.functions.meta.App1;
 import statements.functions.meta.App11;
 import statements.functions.meta.App12;
 import statements.functions.meta.Case;
+import statements.functions.meta.Cleave;
+import statements.functions.meta.Cond;
 import statements.functions.meta.Construct;
 import statements.functions.meta.Dip;
 import statements.functions.meta.I;
 import statements.functions.meta.Opcase;
 import statements.functions.meta.Times;
 import statements.functions.meta.X;
+import statements.functions.meta.branch.Branch;
+import statements.functions.meta.branch.Ifchar;
+import statements.functions.meta.branch.Iffloat;
+import statements.functions.meta.branch.Ifinteger;
+import statements.functions.meta.branch.Iflist;
+import statements.functions.meta.branch.Iflogical;
+import statements.functions.meta.branch.Ifset;
+import statements.functions.meta.branch.Ifstring;
+import statements.functions.meta.branch.Ifte;
 import statements.functions.meta.functionarity.Binary;
 import statements.functions.meta.functionarity.Nullary;
 import statements.functions.meta.functionarity.Ternary;
@@ -80,6 +91,8 @@ import statements.functions.meta.functionarity.Unary;
 import statements.functions.meta.functionarity.Unary2;
 import statements.functions.meta.functionarity.Unary3;
 import statements.functions.meta.functionarity.Unary4;
+import statements.functions.meta.loop.Linrec;
+import statements.functions.meta.loop.While;
 import statements.functions.shuffle.Dup;
 import statements.functions.shuffle.Dupd;
 import statements.functions.shuffle.Pop;
@@ -136,6 +149,7 @@ public abstract class builtins {
 			//TODO: stdout
 			//TODO: stderr
 			{"id", Id.class},
+			{"dup", Dup.class},
 			{"swap", Swap.class},
 			{"rollup", Rollup.class},
 			{"rolldown", Rolldown.class},
@@ -270,7 +284,20 @@ public abstract class builtins {
 			{"app4", Unary4.class},
 			{"binary", Binary.class},
 			{"ternary", Ternary.class},
-			{"dup", Dup.class},
+			{"cleave", Cleave.class},
+			{"branch", Branch.class},
+			{"ifte", Ifte.class},
+			{"ifinteger", Ifinteger.class},
+			{"ifchar", Ifchar.class},
+			{"iflogical", Iflogical.class},
+			{"ifset", Ifset.class},
+			{"ifstring", Ifstring.class},
+			{"iflist", Iflist.class},
+			{"iffloat", Iffloat.class},
+			//TODO: iffile
+			{"cond", Cond.class},
+			{"while", While.class},
+			{"linrec", Linrec.class},
 			{"times", Times.class}
 	};
 }
