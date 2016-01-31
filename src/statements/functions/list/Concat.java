@@ -21,14 +21,8 @@ public class Concat extends BinaryFunction<AggregateStatement, AggregateStatemen
 		else if(a instanceof PushBits)
 			stackState.push(new PushBits(((PushBits)a).setValue().or(((PushBits)b).setValue())));
 		else {
-			if(stackState.canPop()) {
-				((MutableList)a).body().addAll(((MutableList)b).body());
-				stackState.push(a);
-			} else {
-				MutableList lst = (MutableList) a.dup();
-				lst.body().addAll(((MutableList)b).body());
-				stackState.push(lst);
-			}
+			((MutableList)a).body().addAll(((MutableList)b).body());
+			stackState.push(a);
 		}
 	}
 

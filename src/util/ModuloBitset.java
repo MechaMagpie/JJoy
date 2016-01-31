@@ -17,6 +17,10 @@ public class ModuloBitset {
 			value |= 1L << (l % setSize + setSize) % setSize;
 		}
 	}
+	
+	public ModuloBitset() {
+		value = 0;
+	}
 
 	public ModuloBitset add(long index) {
 		return new ModuloBitset(value | 1L << (index % setSize + setSize) % setSize);
@@ -107,7 +111,7 @@ public class ModuloBitset {
 	}
 	
 	public boolean contains(long index) {
-		return (index | value) != 0;
+		return (index | 1L << value) != 0;
 	}
 	
 	public long size() {

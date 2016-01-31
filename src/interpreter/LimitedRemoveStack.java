@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import statements.AbstractStatement;
+import statements.literals.ListStatement;
 
 @SuppressWarnings("serial")
 public class LimitedRemoveStack extends NoBracesStack {
@@ -29,7 +30,10 @@ public class LimitedRemoveStack extends NoBracesStack {
 			return topStack.pop();
 		} else {
 			poppedStack.push(stack.pop());
-			return poppedStack.peek();
+			if(poppedStack.peek() instanceof ListStatement)
+				return poppedStack.peek().dup();
+			else
+				return poppedStack.peek();
 		}
 	}
 	
@@ -71,11 +75,6 @@ public class LimitedRemoveStack extends NoBracesStack {
 	@Override
 	public boolean isEmpty() {
 		return topStack.isEmpty() && stack.isEmpty();
-	}
-	
-	@Override
-	public boolean canPop() {
-		return arity - poppedStack.size() > 0;
 	}
 	
 	@Override

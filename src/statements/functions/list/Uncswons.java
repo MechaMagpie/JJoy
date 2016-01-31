@@ -1,7 +1,5 @@
 package statements.functions.list;
 
-import java.util.List;
-
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
 import statements.EvaluationException;
@@ -25,12 +23,7 @@ public abstract class Uncswons extends UnaryFunction<AggregateStatement> {
 			ModuloBitset bits = ((PushBits) a).setValue();
 			eval(stackState, new PushBits(bits.rest()), new PushInteger(bits.first()));
 		} else {
-			if(stackState.canPop()) {
-				eval(stackState, a, ((MutableList)a).body().remove(0));
-			} else {
-				List<AbstractStatement> lst = ((MutableList)a).body();
-				eval(stackState, new MutableList(lst.subList(1, lst.size())), lst.get(0));
-			}
+			eval(stackState, a, ((MutableList)a).body().remove(0));
 		}
 	}
 

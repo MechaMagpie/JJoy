@@ -20,14 +20,8 @@ public abstract class Cswons<T, U> extends BinaryFunction<T, U> {
 		else if(a instanceof PushBits)
 			stackState.push(new PushBits(((PushBits) a).setValue().add(((PushInteger)b).longValue())));
 		else {
-			if(stackState.canPop()) {
-				((MutableList)a).body().addFirst(b);
-				stackState.push(a);
-			} else {
-				MutableList lst = new MutableList(((MutableList)a).body());
-				lst.body().addFirst(b);
-				stackState.push(lst);
-			}
+			((MutableList)a).body().addFirst(b);
+			stackState.push(a);
 		}
 	}
 }

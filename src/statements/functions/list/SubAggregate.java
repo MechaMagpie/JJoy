@@ -22,11 +22,7 @@ public abstract class SubAggregate extends BinaryFunction<AggregateStatement, Pu
 		else if (a instanceof PushBits)
 			stackState.push(new PushBits(setCase(((PushBits)a).setValue(), b.longValue())));
 		else {
-			if(stackState.canPop()) {
-				stackState.push(breakList((MutableList)a, b.longValue()));
-			} else {
-				stackState.push(copyRange((MutableList)a, b.longValue()));
-			}
+			stackState.push(breakList((MutableList)a, b.longValue()));
 		}
 	}
 

@@ -91,7 +91,10 @@ import statements.functions.meta.functionarity.Unary;
 import statements.functions.meta.functionarity.Unary2;
 import statements.functions.meta.functionarity.Unary3;
 import statements.functions.meta.functionarity.Unary4;
+import statements.functions.meta.lists.Split;
+import statements.functions.meta.loop.Binrec;
 import statements.functions.meta.loop.Linrec;
+import statements.functions.meta.loop.Tailrec;
 import statements.functions.meta.loop.While;
 import statements.functions.shuffle.Dup;
 import statements.functions.shuffle.Dupd;
@@ -298,6 +301,10 @@ public abstract class builtins {
 			{"cond", Cond.class},
 			{"while", While.class},
 			{"linrec", Linrec.class},
+			{"tailrec", Tailrec.class},
+			{"binrec", Binrec.class},
+			
+			{"split", Split.class},
 			{"times", Times.class}
 	};
 }

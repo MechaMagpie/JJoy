@@ -28,16 +28,9 @@ public class Enconcat extends TernaryFunction<AbstractStatement, AggregateStatem
 			bits = bits.add(((PushInteger)a).longValue());
 			stackState.push(new PushBits(bits));
 		} else {
-			if(stackState.canPop()) {
-				((MutableList)b).body().addLast(a);
-				((MutableList)b).body().addAll(((MutableList)c).body());
-				stackState.push(b);
-			} else {
-				MutableList lst = (MutableList) b.dup();
-				lst.body().addLast(a);
-				lst.body().addAll(((MutableList)c).body());
-				stackState.push(lst);
-			}
+			((MutableList)b).body().addLast(a);
+			((MutableList)b).body().addAll(((MutableList)c).body());
+			stackState.push(b);
 		}
 	}
 

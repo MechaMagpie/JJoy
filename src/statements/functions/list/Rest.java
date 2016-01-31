@@ -17,12 +17,8 @@ public class Rest extends UnaryFunction<AggregateStatement> {
 		else if(a instanceof PushBits)
 			stackState.push(new PushBits(((PushBits) a).setValue().rest()));
 		else
-			if(stackState.canPop()) {
-				((MutableList)a).body().pop();
-				stackState.push(a);
-			} else {
-				stackState.push(new MutableList(((MutableList)a).body().subList(1, (int) a.size())));
-			}
+			((MutableList)a).body().pop();
+		stackState.push(a);
 	}
 
 	@Override
