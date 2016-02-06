@@ -23,7 +23,7 @@ public abstract class TernaryFunction<T, U, V>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<V>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					2
 					);
 		}
 		try{
@@ -34,7 +34,7 @@ public abstract class TernaryFunction<T, U, V>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<U>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					1
 					);
 		}
 		try{

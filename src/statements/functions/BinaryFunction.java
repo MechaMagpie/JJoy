@@ -21,7 +21,7 @@ public abstract class BinaryFunction<T, U> extends AbstractFunction {
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<U>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					1
 					);
 		}
 		try{

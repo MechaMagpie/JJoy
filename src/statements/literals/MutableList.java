@@ -1,5 +1,6 @@
 package statements.literals;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -41,5 +42,10 @@ public class MutableList extends ListStatement {
 		MutableList m = new MutableList();
 		m.body = tempLst;
 		return m;
+	}
+	
+	@Override
+	public Iterator<AbstractStatement> iterator() {
+		return body.iterator();
 	}
 }

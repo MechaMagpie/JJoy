@@ -1,5 +1,6 @@
 package statements.literals;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
@@ -25,5 +26,10 @@ public class ListedList extends ListStatement {
 		}
 
 		return new MutableList(tempLst);
+	}
+	
+	@Override
+	public Iterator<AbstractStatement> iterator() {
+		throw new UnsupportedOperationException();
 	}
 }

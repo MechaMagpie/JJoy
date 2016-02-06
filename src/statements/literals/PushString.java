@@ -1,5 +1,7 @@
 package statements.literals;
 
+import java.util.Iterator;
+
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
 import statements.EvaluationException;
@@ -50,5 +52,34 @@ public class PushString extends AggregateStatement implements Comparable<PushStr
 		if(obj instanceof PushString)
 			return content.equals(((PushString) obj).content);
 		else return false;
+	}
+	
+	private class StringIterator implements Iterator<AbstractStatement> {
+		private int index;
+		
+		public StringIterator() {
+			index = 0;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return index < content.length();
+		}
+
+		@Override
+		public AbstractStatement next() {
+			return new PushChar(content.charAt(index++));
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
+	}
+
+	@Override
+	public Iterator<AbstractStatement> iterator() {
+		return new StringIterator();
 	}
 }

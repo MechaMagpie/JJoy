@@ -1,5 +1,6 @@
 package statements.literals;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import interpreter.NoBracesStack;
@@ -40,5 +41,10 @@ public class PushBits extends AggregateStatement implements Logical {
 	@Override
 	public long size() {
 		return value.size();
+	}
+	
+	@Override
+	public Iterator<AbstractStatement> iterator() {
+		return value.iterator();
 	}
 }

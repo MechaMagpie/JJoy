@@ -14,6 +14,10 @@ public class NoBracesStack extends LinkedList<AbstractStatement> {
 		rand = new Random();
 	}
 	
+	public NoBracesStack(LinkedList<AbstractStatement> body) {
+		super(body);
+	}
+
 	public AbstractStatement pop() {
 		return super.poll();
 	}

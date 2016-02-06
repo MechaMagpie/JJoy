@@ -25,7 +25,7 @@ public abstract class QuinaryFunction<T, U, V, W, X>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<X>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					4
 					);
 		}
 		try{
@@ -36,7 +36,7 @@ public abstract class QuinaryFunction<T, U, V, W, X>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<W>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					3
 					);
 		}
 		try{
@@ -47,7 +47,7 @@ public abstract class QuinaryFunction<T, U, V, W, X>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<V>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					2
 					);
 		}
 		try{
@@ -58,7 +58,7 @@ public abstract class QuinaryFunction<T, U, V, W, X>
 			throw new ArgumentTypeException(
 					toString(),
 					((Class<U>)(((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1])),
-					0
+					1
 					);
 		}
 		try{

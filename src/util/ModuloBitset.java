@@ -1,7 +1,11 @@
 package util;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
+
+import statements.AbstractStatement;
+import statements.literals.PushInteger;
 
 public class ModuloBitset {
 	private long value;
@@ -120,5 +124,33 @@ public class ModuloBitset {
 			if((value & 1L << i) != 0)
 				n++;
 		return n;
+	}
+
+	public Iterator<AbstractStatement> iterator() {
+		return new SetIterator();
+	}
+	
+	private class SetIterator implements Iterator<AbstractStatement> {
+		private long index;
+		
+		public SetIterator() {
+			index = 0;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return index < size();
+		}
+
+		@Override
+		public AbstractStatement next() {
+			return new PushInteger(get(index++));
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
 	}
 }

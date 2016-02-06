@@ -117,7 +117,7 @@ public abstract class builtins {
 			{"swons", Swons.class},
 			{"first", First.class},
 			{"rest", Rest.class},
-			//TODO: compare
+			{"compare", Compare.class},
 			{"at", At.class},
 			{"of", Of.class},
 			{"size", Size.class},
@@ -185,10 +185,19 @@ public abstract class builtins {
 			{"tailrec", Tailrec.class},
 			{"binrec", Binrec.class},
 			{"genrec", Genrec.class},
+			{"condlinrec", Condlinrec.class},
+			{"step", Step.class},
+			{"fold", Fold.class},
+			{"map", Map.class},
+			{"times", Times.class},
+			{"infra", Infra.class},
+			{"primrec", Primrec.class},
 			{"filter", Filter.class},
 			{"split", Split.class},
 			{"some", Some.class},
 			{"all", All.class},
-			{"times", Times.class}
+			{"treestep", Treestep.class},
+			{"treerec", Treerec.class},
+			{"treegenrec", Treegenrec.class},
 	};
 }

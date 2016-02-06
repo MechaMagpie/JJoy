@@ -13,4 +13,10 @@ public class WrongYieldException extends EvaluationException {
 		this.expected = expected;
 		this.actual = actual;
 	}
+	
+	public WrongYieldException(String name, Class<?> actual) {
+		this.name = name;
+		this.actual = actual;
+		this.expected = null;
+	}
 }
