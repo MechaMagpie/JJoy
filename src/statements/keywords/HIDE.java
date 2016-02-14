@@ -1,9 +1,10 @@
 package statements.keywords;
 
-public class DefinedAs extends Delimiter {
+public class HIDE extends Delimiter {
 
 	@Override
 	public String name() {
-		return "==";
+		return "HIDE";
 	}
+
 }

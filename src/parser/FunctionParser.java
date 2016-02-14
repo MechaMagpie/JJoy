@@ -46,4 +46,8 @@ public class FunctionParser {
 	public void defineFunction(String name, Program body) {
 		userDefs.get(name).update(body);
 	}
+
+	public void hide(String hiddenName) {
+		userDefs.remove(hiddenName);
+	}
 }

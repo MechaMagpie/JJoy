@@ -17,6 +17,9 @@ import statements.keywords.*;
 public abstract class builtins {
 	public static final Object[][] builtins = {
 			{"DEFINE", DEFINE.class},
+			{"LIBRA", LIBRA.class},
+			{"HIDE", HIDE.class},
+			{"IN", IN.class},
 			{"==", DefinedAs.class},
 			{"maxint", MaxInt.class},
 			//TODO: setsize

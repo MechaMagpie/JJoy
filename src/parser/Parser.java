@@ -39,9 +39,12 @@ public class Parser {
 			if(lastRead == '.') evalResult.eval(new Program(new LinkedList<AbstractStatement>()));
 			else {
 				AbstractStatement first = parseStatement();
-				if(first instanceof DEFINE) {
+				if(first instanceof DEFINE || first instanceof LIBRA) {
 					eatSpace();
 					parseDefine();
+				} else if(first instanceof HIDE) {
+					eatSpace();
+					parseModule();
 				} else {
 					LinkedList<AbstractStatement> body = new LinkedList<AbstractStatement>();
 					body.add(first);
@@ -91,6 +94,52 @@ public class Parser {
 				feed();
 				eatSpace();
 			}
+		}
+	}
+	
+	private void parseModule() throws IOException {
+		LinkedList<String> hidden = new LinkedList<String>();
+		hide: while(true) {
+			LinkedList<AbstractStatement> body = new LinkedList<AbstractStatement>();
+			UnknownStatement name = (UnknownStatement) parseStatement();
+			fparser.declareFunction(name.getName());
+			hidden.add(name.getName());
+			eatSpace();
+			parseStatement();
+			eatSpace();
+			while(!(lastRead == '.' || lastRead == ';')) {
+				body.add(parseStatement());
+				eatSpace();
+				if(body.getLast() instanceof IN) {
+					body.removeLast();
+					fparser.defineFunction(name.getName(), new Program(body));
+					break hide;
+				}
+			}
+			fparser.defineFunction(name.getName(), new Program(body));
+			feed();
+			eatSpace();
+		}
+		while(true) {
+			LinkedList<AbstractStatement> body = new LinkedList<AbstractStatement>();
+			UnknownStatement name = (UnknownStatement) parseStatement();
+			fparser.declareFunction(name.getName());
+			eatSpace();
+			parseStatement();
+			eatSpace();
+			while(!(lastRead == '.' || lastRead == ';')) {
+				body.add(parseStatement());
+				eatSpace();
+			}
+			fparser.defineFunction(name.getName(), new Program(body));
+			if(lastRead == '.') break;
+			else {
+				feed();
+				eatSpace();
+			}
+		}
+		for(String hiddenName : hidden) {
+			fparser.hide(hiddenName);
 		}
 	}
 
