@@ -10,7 +10,6 @@ import statements.functions.MalformedListException;
 import statements.literals.FileHandle;
 import statements.literals.ListStatement;
 import statements.literals.PushInteger;
-import util.IntRange;
 
 public class Fwrite extends BinaryFunction<FileHandle, ListStatement> {
 

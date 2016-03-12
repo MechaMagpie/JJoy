@@ -17,7 +17,6 @@ public class FileHandle extends DataType {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "file:" + file.toString();
 	}
 
