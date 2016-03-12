@@ -10,4 +10,9 @@ public class MismatchedArgumentsException extends EvaluationException {
 		this.arg0 = arg0;
 		this.arg1 = arg1;
 	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "Mismatched arguments: \"" + arg0.getName() + "\" and \"" + arg1.getName() + "\"";
+	}
 }

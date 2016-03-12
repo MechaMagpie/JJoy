@@ -9,4 +9,9 @@ public class MalformedProgramException extends EvaluationException {
 	public MalformedProgramException(String cause) {
 		this.cause = cause;
 	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "Tried to evaluate non-function \"" + cause + "\"";
+	}
 }

@@ -1,3 +1,6 @@
 package statements;
 @SuppressWarnings("serial")
-public class EvaluationException extends Exception {}
+public abstract class EvaluationException extends Exception {
+	
+	public abstract String helpfulMessage(); 
+}

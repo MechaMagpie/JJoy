@@ -5,7 +5,7 @@ import statements.AbstractStatement;
 public abstract class AbstractFunction extends AbstractStatement {
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		return name();
 	}
 }

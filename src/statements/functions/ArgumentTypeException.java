@@ -1,6 +1,5 @@
 package statements.functions;
 
-import statements.AbstractStatement;
 import statements.EvaluationException;
 
 @SuppressWarnings("serial")
@@ -13,5 +12,10 @@ public class ArgumentTypeException extends EvaluationException {
 		this.caller = caller;
 		this.correct = correct;
 		this.argNr = argNr;
+	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "Argument #" + argNr + " of function \"" + caller + "\" of wrong type, needs to be \"" + correct.getName() + "\"";
 	}
 }

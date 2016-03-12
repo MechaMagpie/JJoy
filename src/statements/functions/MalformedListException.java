@@ -11,4 +11,9 @@ public class MalformedListException extends EvaluationException {
 		this.caller = caller;
 		this.list = list;
 	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "Wrong list format for operation \"" + caller + "\", list: " + list;
+	}
 }

@@ -10,7 +10,7 @@ public class REPL {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		Parser parser = new Parser(new BufferedReader(new InputStreamReader(System.in)), new EP());
 		try {
-			parser.parse();
+			parser.parseIndefinitely();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

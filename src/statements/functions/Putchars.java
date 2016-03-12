@@ -1,27 +1,19 @@
 package statements.functions;
 
-import java.io.StringReader;
-
 import interpreter.NoBracesStack;
-import parser.Parser;
 import statements.EvaluationException;
 import statements.literals.PushString;
 
-public class Intern extends UnaryFunction<PushString> {
-	Parser parser;
-	
-	public Intern(Parser parser) {
-		this.parser = parser;
-	}
-	
+public final class Putchars extends UnaryFunction<PushString> {
+
 	@Override
 	protected void eval(NoBracesStack stackState, PushString a) throws EvaluationException {
-		stackState.push(parser.parseSingle(new StringReader(a.stringValue())));
+		System.out.println(a.stringValue());
 	}
 
 	@Override
 	public String name() {
-		return "intern";
+		return "putchars";
 	}
 
 }

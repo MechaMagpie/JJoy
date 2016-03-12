@@ -2,7 +2,7 @@ package statements.functions.meta.branch;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
-import statements.functions.MismatchedArgumentsException;
+import statements.EvaluationException;
 import statements.functions.TernaryFunction;
 import statements.literals.ListStatement;
 
@@ -10,7 +10,7 @@ public abstract class TypeBranch extends TernaryFunction<AbstractStatement, List
 
 	@Override
 	protected void eval(NoBracesStack stackState, AbstractStatement a, ListStatement b, ListStatement c)
-			throws MismatchedArgumentsException {
+			throws EvaluationException {
 		if(typeChecked().isInstance(a))
 			b.dequote(stackState);
 		else

@@ -2,22 +2,13 @@ package parser;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
 import statements.keywords.*;
-import statements.literals.ListStatement;
-import statements.literals.ListedList;
-import statements.literals.NumberStatement;
-import statements.literals.PushBits;
-import statements.literals.PushChar;
-import statements.literals.PushFloat;
-import statements.literals.PushInteger;
-import statements.literals.PushString;
+import statements.literals.*;
 import statements.*;
-import statements.functions.Intern;
 
 public class Parser {
 	private FunctionParser fparser;
@@ -27,42 +18,46 @@ public class Parser {
 	private ProgramEvaluator evalResult;
 
 	public Parser(Reader reader, ProgramEvaluator evalResult) {
-		fparser = new FunctionParser(new Intern(this));
+		fparser = new FunctionParser(this);
 		this.reader = reader;
 		this.evalResult = evalResult;
 	}
 
-	public void parse() throws IOException {
-		while(true) {
+	public void parseIndefinitely() throws IOException {
+		while(!evalResult.stopped()) {
 			feed();
-			eatSpace();
-			if(lastRead == '.') evalResult.eval(new Program(new LinkedList<AbstractStatement>()));
-			else {
-				AbstractStatement first = parseStatement();
-				if(first instanceof DEFINE || first instanceof LIBRA) {
+			parse();
+		}
+	}
+	
+	public void parse() throws IOException {
+		eatSpace();
+		if(lastRead == '.') evalResult.eval(new Program(new LinkedList<AbstractStatement>()));
+		else {
+			AbstractStatement first = parseStatement();
+			if(first instanceof DEFINE || first instanceof LIBRA) {
+				eatSpace();
+				parseDefine();
+			} else if(first instanceof HIDE) {
+				eatSpace();
+				parseModule();
+			} else {
+				LinkedList<AbstractStatement> body = new LinkedList<AbstractStatement>();
+				body.add(first);
+				eatSpace();
+				while(lastRead != '.') {
+					body.add(parseStatement());
 					eatSpace();
-					parseDefine();
-				} else if(first instanceof HIDE) {
-					eatSpace();
-					parseModule();
-				} else {
-					LinkedList<AbstractStatement> body = new LinkedList<AbstractStatement>();
-					body.add(first);
-					eatSpace();
-					while(lastRead != '.') {
-						body.add(parseStatement());
-						eatSpace();
-					}
-					evalResult.eval(new Program(body));
 				}
+				evalResult.eval(new Program(body));
 			}
 		}
 	}
 	
-	public AbstractStatement parseSingle(String name) {
+	public AbstractStatement parseSingle(Reader newReader) {
 		Reader temp = reader;
 		char tempC = lastRead;
-		reader = new StringReader(name);
+		reader = newReader;
 		AbstractStatement a = null;
 		try {
 			feed();
@@ -74,6 +69,22 @@ public class Parser {
 		reader = temp;
 		lastRead = tempC;
 		return a;
+	}
+
+	public void parseFully(Reader newReader) {
+		Reader temp = reader;
+		char tempC = lastRead;
+		reader = newReader;
+		try {
+			while(testFeed()) {
+				parse();
+			}
+		} catch (IOException e) {
+			// Hopefully unreachable
+			e.printStackTrace();
+		}
+		reader = temp;
+		lastRead = tempC;
 	}
 
 	private void parseDefine() throws IOException {
@@ -237,6 +248,15 @@ public class Parser {
 		char temp = lastRead;
 		lastRead = (char) reader.read();
 		return temp;
+	}
+	
+	private boolean testFeed() throws IOException {
+		int temp = reader.read();
+		if (temp == -1) return false;
+		else {
+			lastRead = (char) temp;
+			return true;
+		}
 	}
 	
 	

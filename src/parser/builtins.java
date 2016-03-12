@@ -1,6 +1,7 @@
 package parser;
 
 import statements.functions.*;
+import statements.functions.file.*;
 import statements.functions.list.*;
 import statements.functions.logic.*;
 import statements.functions.math.*;
@@ -22,7 +23,6 @@ public abstract class builtins {
 			{"IN", IN.class},
 			{"==", DefinedAs.class},
 			{"maxint", MaxInt.class},
-			//TODO: setsize
 			{"stack", QuoteStack.class},
 			//TODO: conts
 			//TODO: autoput
@@ -32,9 +32,6 @@ public abstract class builtins {
 			//TODO: clock
 			{"time", PushTime.class},
 			{"rand", Rand.class},
-			//TODO: stdin
-			//TODO: stdout
-			//TODO: stderr
 			{"id", Id.class},
 			{"dup", Dup.class},
 			{"swap", Swap.class},
@@ -97,24 +94,23 @@ public abstract class builtins {
 			{"succ", Succ.class},
 			{"max", Max.class},
 			{"min", Min.class},
-			//TODO: fclose
-			//TODO: feof
-			//TODO: ferror
-			//TODO: fflush
-			//TODO: fgetch
-			//TODO: fgets
-			//TODO: fopen
-			//TODO: fread
-			//TODO: fwrite
-			//TODO: fremove
-			//TODO: frename
-			//TODO: fput
-			//TODO: fputch
-			//TODO: fputchars
-			//TODO: fputstring
-			//TODO: fputstring
-			//TODO: fseek
-			//TODO: ftell
+			{"fclose", Fclose.class},
+			{"feof", Feof.class},
+			{"ferror", Ferror.class},
+			{"fflush", Fflush.class},
+			{"fgetch", Fgetch.class},
+			{"fgets", Fgets.class},
+			{"fopen", Fopen.class},
+			{"fread", Fread.class},
+			{"fwrite", Fwrite.class},
+			{"fremove", Fremove.class},
+			{"frename", Frename.class},
+			{"fput", Fput.class},
+			{"fputch", Fputch.class},
+			{"fputchars", Fputchars.class},
+			{"fputstring", Fputchars.class},
+			{"fseek", Fseek.class},
+			{"ftell", Ftell.class},
 			{"unstack", Unstack.class},
 			{"cons", Cons.class},
 			{"swons", Swons.class},
@@ -153,7 +149,7 @@ public abstract class builtins {
 			{"leaf", TestLeaf.class},
 			{"user", TestUser.class},
 			{"float", TestFloat.class},
-			//TODO: file
+			{"file", TestFile.class},
 			{"i", I.class},
 			{"x", X.class},
 			{"dip", Dip.class},
@@ -181,7 +177,7 @@ public abstract class builtins {
 			{"ifstring", Ifstring.class},
 			{"iflist", Iflist.class},
 			{"iffloat", Iffloat.class},
-			//TODO: iffile
+			{"iffile", Iffile.class},
 			{"cond", Cond.class},
 			{"while", While.class},
 			{"linrec", Linrec.class},
@@ -202,5 +198,12 @@ public abstract class builtins {
 			{"treestep", Treestep.class},
 			{"treerec", Treerec.class},
 			{"treegenrec", Treegenrec.class},
+			{"gc", Gc.class},
+			{"system", SystemCall.class},
+			{"put", Put.class},
+			{"putch", Putch.class},
+			{"putchars", Putchars.class},
+			{"abort", Abort.class},
+			{"quit", Quit.class}
 	};
 }

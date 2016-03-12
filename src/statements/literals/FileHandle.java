@@ -1,17 +1,26 @@
 package statements.literals;
 
-import java.io.File;
-
 import interpreter.NoBracesStack;
 import statements.EvaluationException;
+import util.FileDuplexStream;
 
 public class FileHandle extends DataType {
-	private File file;
+	private FileDuplexStream file;
 	
-	public FileHandle(File file) {
+	public FileHandle(FileDuplexStream file) {
 		this.file = file;
 	}
 	
+	public FileDuplexStream getFile() {
+		return file;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "file:" + file.toString();
+	}
+
 	@Override
 	public void eval(NoBracesStack stackState) throws EvaluationException {
 		stackState.push(this);
@@ -20,9 +29,5 @@ public class FileHandle extends DataType {
 	@Override
 	public String name() {
 		return " file type";
-	}
-
-	public File getFile() {
-		return file;
 	}
 }

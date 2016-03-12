@@ -17,7 +17,6 @@ public class Enconcat extends TernaryFunction<AbstractStatement, AggregateStatem
 	@Override
 	protected void eval(NoBracesStack stackState, AbstractStatement a, AggregateStatement b, AggregateStatement c) throws MismatchedArgumentsException {
 		if(!b.getClass().isInstance(c))
-			//TODO: better exception
 			throw new MismatchedArgumentsException(b.getClass(), c.getClass());
 		if(!b.matchingType(a))
 			throw new MismatchedArgumentsException(a.getClass(), b.getClass());
@@ -36,8 +35,7 @@ public class Enconcat extends TernaryFunction<AbstractStatement, AggregateStatem
 
 	@Override
 	public String name() {
-		// TODO Auto-generated method stub
-		return null;
+		return "enconcat";
 	}
 
 }

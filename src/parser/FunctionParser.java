@@ -5,14 +5,21 @@ import java.util.Map;
 
 import statements.AbstractStatement;
 import statements.UnknownStatement;
+import statements.functions.Get;
+import statements.functions.Include;
 import statements.functions.Intern;
+import statements.literals.FileHandle;
+import statements.literals.PushInteger;
 import statements.literals.PushTruth;
+import util.JoyStdin;
+import util.JoyStdout;
+import util.ModuloBitset;
 
 @SuppressWarnings("unchecked")
 public class FunctionParser {
 	private static Map<String, AbstractStatement> functions;
+	private Map<String, AbstractStatement> dynamicFunctions;
 	private Map<String, UserDef> userDefs;
-	private Intern internInstance;
 
 	static {
 		functions = new HashMap<String, AbstractStatement>();
@@ -25,17 +32,25 @@ public class FunctionParser {
 		}
 		functions.put("true", new PushTruth(true));
 		functions.put("false", new PushTruth(false));
+		functions.put("stdin", new FileHandle(new JoyStdin(System.in, "stdin")));
+		functions.put("stdout", new FileHandle(new JoyStdout(System.out, "stdout")));
+		functions.put("stderr", new FileHandle(new JoyStdout(System.err, "stderr")));
+		functions.put("setsize", new PushInteger(ModuloBitset.setSize));
+		
 	}
 	
-	public FunctionParser(Intern intern) {
+	public FunctionParser(Parser parser) {
 		userDefs = new HashMap<String, UserDef>();
-		this.internInstance = intern;
+		dynamicFunctions = new HashMap<String, AbstractStatement>();
+		dynamicFunctions.put("intern", new Intern(parser));
+		dynamicFunctions.put("get", new Get(parser));
+		dynamicFunctions.put("include", new Include(parser));
 	}
 
 	public AbstractStatement getFunction(String string)  {
-		if(functions.containsKey(string)) return functions.get(string);
-		else if (string.equals("intern")) return internInstance;
-		else if(userDefs.containsKey(string)) return userDefs.get(string);
+		if(userDefs.containsKey(string)) return userDefs.get(string);
+		else if(functions.containsKey(string)) return functions.get(string);
+		else if(dynamicFunctions.containsKey(string)) return dynamicFunctions.get(string);
 		else return new UnknownStatement(string);
 	}
 	

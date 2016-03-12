@@ -19,4 +19,9 @@ public class WrongYieldException extends EvaluationException {
 		this.actual = actual;
 		this.expected = null;
 	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "Function \"" + name + "\" requires test to yield type \"" + expected.getName() + "\", received \"" + actual.getName() + "\"";
+	}
 }

@@ -1,7 +1,7 @@
 package statements.functions.meta.branch;
 
 import interpreter.NoBracesStack;
-import statements.functions.MismatchedArgumentsException;
+import statements.EvaluationException;
 import statements.functions.TernaryFunction;
 import statements.literals.ListStatement;
 import statements.literals.PushTruth;
@@ -10,7 +10,7 @@ public class Branch extends TernaryFunction<PushTruth, ListStatement, ListStatem
 
 	@Override
 	protected void eval(NoBracesStack stackState, PushTruth a, ListStatement b, ListStatement c)
-			throws MismatchedArgumentsException {
+			throws EvaluationException {
 		if(a.boolValue())
 			b.dequote(stackState);
 		else

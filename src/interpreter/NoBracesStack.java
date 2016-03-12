@@ -8,6 +8,7 @@ import statements.AbstractStatement;
 @SuppressWarnings("serial")
 public class NoBracesStack extends LinkedList<AbstractStatement> {
 	private Random rand;
+	private boolean stopping = false, quitting = false;
 
 	public NoBracesStack() {
 		super();
@@ -40,5 +41,25 @@ public class NoBracesStack extends LinkedList<AbstractStatement> {
 		}
 		if(sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
+	}
+
+	public boolean shouldStop() {
+		return stopping;
+	}
+
+	public boolean shouldQuit() {
+		return quitting;
+	}
+	
+	public void stop() {
+		stopping = true;
+	}
+	
+	public void resume() {
+		stopping = false;
+	}
+	
+	public void quit() {
+		quitting = true;
 	}
 }

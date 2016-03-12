@@ -4,6 +4,7 @@ import java.util.List;
 
 import interpreter.NoBracesStack;
 import statements.AbstractStatement;
+import statements.EvaluationException;
 
 public class UserDef extends AbstractStatement {
 	private Program body;
@@ -23,7 +24,7 @@ public class UserDef extends AbstractStatement {
 	}
 	
 	@Override
-	public void eval(NoBracesStack stackState) {
+	public void eval(NoBracesStack stackState) throws EvaluationException {
 		body.eval(stackState);
 	}
 

@@ -7,4 +7,9 @@ public class UnknownFunctionException extends EvaluationException {
 	public UnknownFunctionException(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public String helpfulMessage() {
+		return "No function by name \"" + name + "\"";
+	}
 }

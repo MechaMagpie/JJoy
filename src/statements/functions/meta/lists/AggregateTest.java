@@ -60,7 +60,7 @@ public abstract class AggregateTest extends BinaryFunction<AggregateStatement, L
 		}
 	}
 	
-	private boolean runTest(NoBracesStack stackState, ListStatement b) throws WrongYieldException {
+	private boolean runTest(NoBracesStack stackState, ListStatement b) throws EvaluationException {
 		LimitedRemoveStack tempStk = new LimitedRemoveStack(stackState, 1);
 		b.dequote(tempStk);
 		tempStk.close();

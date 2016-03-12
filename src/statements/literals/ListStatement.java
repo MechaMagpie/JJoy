@@ -6,6 +6,7 @@ import java.util.List;
 import interpreter.NoBracesStack;
 import parser.Program;
 import statements.AbstractStatement;
+import statements.EvaluationException;
 import util.ListDeprinter;
 
 public abstract class ListStatement extends AggregateStatement implements NumericValue {
@@ -26,7 +27,7 @@ public abstract class ListStatement extends AggregateStatement implements Numeri
 		return sb.toString();
 	}
 	
-	public void dequote(NoBracesStack stackState) {
+	public void dequote(NoBracesStack stackState) throws EvaluationException {
 		Program p = new Program(body);
 		p.eval(stackState);
 	}
